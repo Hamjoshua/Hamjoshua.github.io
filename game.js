@@ -7,7 +7,7 @@ let giraffe = {
     y: 150,
     width: 20,
     height: 20,
-    gravity: 0.1,
+    gravity: 0.15,
     lift: -4,
     velocity: 0,
 };
