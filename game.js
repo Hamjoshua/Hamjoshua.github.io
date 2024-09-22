@@ -8,7 +8,7 @@ let giraffe = {
     width: 20,
     height: 20,
     gravity: 0.1,
-    lift: -10,
+    lift: -4,
     velocity: 0,
 };
 
@@ -20,7 +20,7 @@ let score = 0;
 
 function setup() {
     document.addEventListener("click", () => {
-        giraffe.velocity += giraffe.lift;
+        giraffe.velocity = giraffe.lift;
     });
     setInterval(() => {
         if (isGameOver) {
@@ -38,9 +38,11 @@ function setup() {
 function drawDebugger() {
     ctx.fillText("x: " + giraffe.x, 10, 40);
     ctx.fillText("y: " + giraffe.y, 10, 60);
-    ctx.fillText("canvas-width: " + canvas.width, 10, 80);
-    ctx.fillText("canvas-heigth: " + canvas.height, 10, 100);
-    ctx.fillText("Game over: " + isGameOver, 10, 120);
+    ctx.fillText("velocity: " + giraffe.velocity, 10, 80);
+    ctx.fillText("gravity: " + giraffe.gravity, 10, 100);
+    ctx.fillText("canvas-width: " + canvas.width, 10, 120);
+    ctx.fillText("canvas-heigth: " + canvas.height, 10, 140);
+    ctx.fillText("Game over: " + isGameOver, 10, 160);
 }
 function reloadGame() {
     document.location.reload();
@@ -49,6 +51,10 @@ function reloadGame() {
 function showGameWindow(text, buttonText, action) {    
     let gameWindow = document.createElement('div');
     gameWindow.className = "game-window";
+
+    let header = document.createElement('p');
+    header.textContent = text;
+    gameWindow.appendChild(header);
 
     let button = document.createElement('button');
     button.textContent = buttonText;

@@ -1,7 +1,11 @@
 html, body {
     width: 100%;
     height: 100%;
-    margin: 0;
+    margin: 0;    
+}
+
+* {
+    font-family: 'Comic Sans MS'
 }
 
 .game-window {
@@ -14,6 +18,8 @@ html, body {
     color: #fff;
     padding: 20px;
     border-radius: 10px;
+    display: flex;
+    flex-flow: column;
 }
 
 .game-button {
@@ -24,3 +30,7 @@ html, body {
     border: none;
     border-radius: 5px;
 }
+
+    .game-button:hover {
+        background-color: #4d8f52;
+    }
