@@ -1,5 +1,6 @@
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
+const PIPE_GATE_PERCENT = 20;
 let isGameOver = false;
 
 let giraffe = {
@@ -71,7 +72,7 @@ function showGameWindow(text, buttonText, action) {
 class Pipe {
     constructor() {
         this.top = Math.random() * (canvas.height / 2);
-        this.bottom = Math.random() * (canvas.height / 2);
+        this.bottom = canvas.height - (PIPE_GATE_PERCENT * canvas.height / 100) - this.top;
         this.x = canvas.width;
         this.width = 50;
         this.counted = false;
@@ -101,13 +102,17 @@ function gameLoop() {
     canvas.width = window.innerWidth - 10;
     canvas.height = window.innerHeight - 10;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.save();
 
     // Обработка жирафа
     giraffe.velocity += giraffe.gravity;
     giraffe.y += giraffe.velocity;
-
-    ctx.fillStyle = "#FFD700"; // Цвет жирафа
-    ctx.fillRect(giraffe.x, giraffe.y, giraffe.width, giraffe.height);
+    
+    ctx.fillStyle = "#FFD700"; // Цвет жирафа   
+    ctx.translate(giraffe.x, giraffe.y);
+    ctx.rotate((Math.PI / 180) * giraffe.velocity);
+    ctx.fillRect(0, 0, giraffe.width, giraffe.height);
+    ctx.restore();
 
     if (giraffe.y < 0 || giraffe.y + giraffe.height > canvas.height) {
         isGameOver = true;       
